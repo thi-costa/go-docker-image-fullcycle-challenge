@@ -11,3 +11,8 @@ COPY go.mod *.go ./
 # Buildar aplicação e remover informações de debug
 RUN go build -ldflags '-s -w' -o hello
 
+FROM scratch
+
+WORKDIR /
+COPY --from=builder /usr/src /
+CMD ["./hello"]
